@@ -6,19 +6,60 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            /* background-color: #222;
-            color: #fff; */
             background-color: #fff;
             color: purple;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .animated-btn {
+            background: linear-gradient(90deg, #a4508b 0%, #5f0a87 100%);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 20px 60px;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(164,80,139,0.2);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.4s;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .animated-btn::after {
+            content: "";
+            position: absolute;
+            left: -75%;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transform: skewX(-20deg);
+            transition: left 0.5s;
+        }
+        .animated-btn:hover {
+            transform: scale(1.07) rotate(-1deg);
+            box-shadow: 0 12px 32px rgba(95,10,135,0.25);
+            background: linear-gradient(90deg, #5f0a87 0%, #a4508b 100%);
+        }
+        .animated-btn:hover::after {
+            left: 120%;
         }
     </style>
 </head>
 <body>
-    <h1>TEST HOST NEW</h1>
+    <div class="button-container">
+        <button class="animated-btn" onclick="window.location.href='/students'">Students</button>
+        <button class="animated-btn" onclick="window.location.href='/companies'">Companies</button>
+    </div>
 </body>
 </html>
