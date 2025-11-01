@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}<!-- tab title here -->{% endblock %}</title>
+
+    <!-- Website ICON -->
+    <link rel="icon" href="{{ url_for('static', filename='images/icon.ico') }}" type="image/x-icon">
+
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+
+<body>
+{% block content %}
+  <!-- page content here -->
+{% endblock %}
+<!-- JS scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="{{ url_for('static', filename='js/AOS.js') }}"></script>
+</body>
+</html>

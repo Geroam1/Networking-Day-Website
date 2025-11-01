@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Students</title>
-    <link rel="icon" href="{{ url_for('static', filename='icon.ico') }}" type="image/x-icon">
-</head>
-<body style="background:#fff; color:purple; text-align:center;">
-    <h1>Students Schedule</h1>
-    <img src="{{ url_for('static', filename='sample_schedule.png') }}" alt="Schedule" style="max-width:90vw; max-height:80vh;">
-</body> 
-</html>
+{% extends "layout.html" %}
+
+{% block title %}Students{% endblock %}
+
+{% block content %}
+<section class="button-container">
+  <h1 data-aos="fade-down">Find Your Schedule</h1>
+  <form method="POST" action="/students" class="button-container" data-aos="fade-up">
+
+    <!-- name value sent to flask -->
+    <input type="text" name="name" class="search-input" placeholder="Enter your name" required>
+
+    <button class="animated-btn" type="submit">Search</button>
+  </form>
+  {% if error %}
+    <p style="color:red;">{{ error }}</p>
+  {% endif %}
+</section>
+{% endblock %}

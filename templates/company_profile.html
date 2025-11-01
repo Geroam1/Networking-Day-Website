@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ company.name }} | Schedule{% endblock %}
+
+{% block content %}
+<section>
+  <h1>{{ company.name }}</h1>
+  <p><strong>Schedule:</strong></p>
+  <ul>
+    <li>First: Group {{ company.first_group }}</li>
+    <li>Second: Group {{ company.second_group }}</li>
+    <li>Third: Group {{ company.third_group }}</li>
+  </ul>
+  <div class="button-container">
+  <button class="animated-btn" onclick="window.location.href='/companies'">Back</button>
+  </div>
+</section>
+{% endblock %}

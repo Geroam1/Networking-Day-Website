@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ student.name }} | Schedule{% endblock %}
+
+{% block content %}
+<section>
+  <h1>{{ student.name }}</h1>
+  <p><strong>Group:</strong> {{ student.group }}</p>
+  <p><strong>Schedule:</strong></p>
+  <ul>
+    <li>Morning: {{ student.morning }}</li>
+    <li>Afternoon: {{ student.afternoon }}</li>
+    <li>Evening: {{ student.evening }}</li>
+    <li>Extra: {{ student.extra }}</li>
+  </ul>
+  <div class="button-container">
+  <button class="animated-btn" onclick="window.location.href='/students'">Back</button>
+  </div>
+</section>
+{% endblock %}
