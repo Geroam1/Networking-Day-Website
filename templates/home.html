@@ -3,24 +3,6 @@
 {% block title %}Netwerkdagtw{% endblock %}
 
 {% block content %}
-<!-- <h1 data-aos="fade-down">Netwerkdagtw</h1>
-
-<div class="button-container" data-aos="zoom-in">
-    <button class="animated-btn" onclick="window.location.href='/students'">Students</button>
-    <button class="animated-btn" onclick="window.location.href='/companies'">Companies</button>
-</div> -->
-
-<!-- Second section (below) -->
-<!-- <section class="background-image">
-  <h2 class="welcome-title" data-aos="fade-down">Welcome!</h2>
-  <p class="intro-text" data-aos="zoom-in">
-    Welcome to the Applied mathematics Networking Day!
-    This website will contain the information you will need.
-    Schedules and general info for companies and students can be found via the buttons below. 
-  </p>
-</section>
-
- -->
 <section class="button-container">
   <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Netwerkdagtw Logo" data-aos="fade-down"/>
   <div class="button-container" data-aos="zoom-in">
@@ -28,5 +10,4 @@
     <button class="animated-btn" onclick="window.location.href='/companies'">Companies</button>
   </div>
 </section>
-
 {% endblock %}

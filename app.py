@@ -41,10 +41,8 @@ def students():
     if request.method == 'POST':
         name = request.form['name'].strip().lower()
 
-        # Fetch all rows (could optimize with caching later)
         records = STUDENT_SHEET.get_all_records()
 
-        # Search for student by name (case insensitive)
         for row in records:
             if row['name'].lower() == name:
                 return render_template('student_profile.html', student=row)
@@ -68,10 +66,8 @@ def companies():
     if request.method == 'POST':
         name = request.form['name'].strip().lower()
 
-        # Fetch all rows (could optimize with caching later)
         records = COMPANIES_SHEET.get_all_records()
 
-        # Search for companies by name (case insensitive)
         for row in records:
             if row['name'].lower() == name:
                 return render_template('company_profile.html', company=row)
