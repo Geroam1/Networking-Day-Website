@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 import gspread
 from google.oauth2.service_account import Credentials
+import os
+import json
 
 app = Flask(__name__)
 
@@ -9,7 +11,16 @@ SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive"
 ]
-CREDS = Credentials.from_service_account_file("credentials.json", scopes=SCOPE)
+
+creds_json = os.getenv("GOOGLE_CREDENTIALS") # will load the render secret if it exists
+if creds_json: 
+    # Running on Render or environment with secret set
+    creds_info = json.loads(creds_json)
+    CREDS = Credentials.from_service_account_info(creds_info, scopes=SCOPE)
+else:
+    # locally get creds with credentials.json file. TESTING ONLY
+    CREDS = Credentials.from_service_account_file("credentials2.json", scopes=SCOPE)
+
 CLIENT = gspread.authorize(CREDS)
 STUDENT_SHEET = CLIENT.open("Networking Day Data Sheet").worksheet("students_sheet")
 COMPANIES_SHEET = CLIENT.open("Networking Day Data Sheet").worksheet("companies_sheet")
