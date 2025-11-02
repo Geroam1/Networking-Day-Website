@@ -11,7 +11,9 @@
     <input type="text" name="name" class="search-input" placeholder="Enter your name" required>
 
     <button class="animated-btn" type="submit">Search</button>
+    <button class="animated-btn" onclick="window.location.href='/'">Back</button>
   </form>
+
   {% if error %}
     <p style="color:red;">{{ error }}</p>
   {% endif %}
