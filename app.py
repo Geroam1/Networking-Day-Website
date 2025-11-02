@@ -14,12 +14,12 @@ SCOPE = [
 
 creds_json = os.getenv("GOOGLE_CREDENTIALS") # will load the render secret if it exists
 if creds_json: 
-    # Running on Render or environment with secret set
+    # running on Render or environment with secret set
     creds_info = json.loads(creds_json)
     CREDS = Credentials.from_service_account_info(creds_info, scopes=SCOPE)
 else:
     # locally get creds with credentials.json file. TESTING ONLY
-    CREDS = Credentials.from_service_account_file("credentials2.json", scopes=SCOPE)
+    CREDS = Credentials.from_service_account_file("credentials.json", scopes=SCOPE)
 
 CLIENT = gspread.authorize(CREDS)
 STUDENT_SHEET = CLIENT.open("Networking Day Data Sheet").worksheet("students_sheet")
