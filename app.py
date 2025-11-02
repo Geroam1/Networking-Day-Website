@@ -19,6 +19,7 @@ if creds_json:
     creds_info = json.loads(creds_json)
     CREDS = Credentials.from_service_account_info(creds_info, scopes=SCOPE)
 else:
+    print("GOOGLE_CREDENTIALS not found in environment.")
     # locally get creds with credentials.json file. TESTING ONLY
     CREDS = Credentials.from_service_account_file("credentials.json", scopes=SCOPE)
 
