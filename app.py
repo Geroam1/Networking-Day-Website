@@ -14,6 +14,7 @@ SCOPE = [
 
 creds_json = os.getenv("GOOGLE_CREDENTIALS") # will load the render secret if it exists
 if creds_json: 
+    print("GOOGLE_CREDENTIALS found in environment.")
     # running on Render or environment with secret set
     creds_info = json.loads(creds_json)
     CREDS = Credentials.from_service_account_info(creds_info, scopes=SCOPE)
