@@ -30,7 +30,6 @@ section {
     scroll-snap-align: start;
     scroll-margin-top: 0px;
     text-align: center;
-    
 }
 
 
@@ -44,7 +43,7 @@ img {
     max-width: 90vw; 
     height: auto;   
     display: block;
-    margin: 0 auto; 
+
 }
 
 
@@ -53,8 +52,11 @@ img {
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 90vw;
+    max-width: 400px;   /* keep buttons at readable size */
+    margin: 0 auto;     /* centers the container */
+    align-items: center; /* ensures content inside is centered */
 }
+
 
 
 /* button styles */
