@@ -3,7 +3,19 @@
 {% block title %}{{ company.name }} | Schedule{% endblock %}
 
 {% block content %}
-<section>
+<!-- General Info Section -->
+<section class="button-container" id="general-info" data-aos="fade-down">
+  <h1>Welcome, {{ company.name }}!</h2>
+  <p>Before you look at your schedule please read the following general information about the networking day.</p>
+
+  <!-- First Years-->
+  <p><strong>GENERAL INFO COMPANIES</strong></p>
+
+  <button onclick="scrollToSchedule()" class="animated-btn">Scroll To Schedule</button>
+</section>
+
+<!-- Company Schedule Section -->
+<section class="button-container" id="company-schedule" data-aos="fade-in">
   <h1>{{ company.name }}</h1>
   <p><strong>Schedule:</strong></p>
   <ul>
@@ -11,8 +23,15 @@
     <li>Second: Group {{ company.second_group }}</li>
     <li>Third: Group {{ company.third_group }}</li>
   </ul>
+
   <div class="button-container">
-  <button class="animated-btn" onclick="window.location.href='/companies'">Back</button>
+    <button class="animated-btn" onclick="window.location.href='/companies'">Back To Company Search</button>
   </div>
 </section>
+
+<script>
+  function scrollToSchedule() {
+    document.getElementById('company-schedule').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
 {% endblock %}

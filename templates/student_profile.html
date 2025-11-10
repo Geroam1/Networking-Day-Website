@@ -3,7 +3,32 @@
 {% block title %}{{ student.name }} | Schedule{% endblock %}
 
 {% block content %}
-<section>
+<!-- General Info Section -->
+<section class="button-container" id="general-info" data-aos="fade-down">
+  <h1>Welcome, {{ student.name }}!</h2>
+  <p>Before you look at your schedule please read the following general information about the networking day.</p>
+
+  <!-- First Years-->
+  {% if student.year == 1 %}
+  <p><strong>GENERAL INFO FIRST YEAR</strong></p>
+
+  <!-- Second Years-->
+  {% elif student.year == 2 %}
+  <p><strong>GENERAL INFO SECOND YEAR</strong></p>
+
+  <!-- Third and Fourth Years-->  
+  {% elif student.year == 3 or student.year == 4 %}
+  <p><strong>GENERAL INFO THIRD AND FOURTH YEAR</strong></p>
+
+  {% else %}
+  <p>Your student year is unknown, please contact someone from the committee to help you.</p>
+  {% endif %}
+
+  <button onclick="scrollToSchedule()" class="animated-btn">Scroll To Schedule</button>
+</section>
+
+<!-- Student Schedule Section -->
+<section class="button-container" id="student-schedule" data-aos="fade-in">
   <h1>{{ student.name }}</h1>
   <p><strong>Group:</strong> {{ student.group }}</p>
   <p><strong>Schedule:</strong></p>
@@ -13,8 +38,15 @@
     <li>Evening: {{ student.evening }}</li>
     <li>Extra: {{ student.extra }}</li>
   </ul>
+  
   <div class="button-container">
-  <button class="animated-btn" onclick="window.location.href='/students'">Back</button>
+    <button class="animated-btn" onclick="window.location.href='/students'">Back to Name Search</button>  
   </div>
 </section>
+
+<script>
+  function scrollToSchedule() {
+    document.getElementById('student-schedule').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
 {% endblock %}
