@@ -5,17 +5,61 @@
 {% block content %}
 <section class="button-container">
   <h1 data-aos="fade-down">Find Your Schedule</h1>
-  <form method="POST" action="/students" class="button-container" data-aos="fade-up">
-
-    <!-- name value sent to flask -->
-    <input type="text" name="name" class="search-input" placeholder="Enter your name" required>
-
-    <button class="animated-btn" type="submit">Search</button>
-    <button class="animated-btn" onclick="window.location.href='/'">Back</button>
-  </form>
 
   {% if error %}
     <p style="color:red;" data-aos="fade-up">{{ error }}</p>
   {% endif %}
+
+  <form method="POST" action="/students" class="button-container" data-aos="fade-up">
+
+    <!-- name value sent to flask -->
+    <input 
+        type="search" 
+        name="name" 
+        id="student-input"  
+        list="student-names" 
+        class="search-input" 
+        placeholder="Enter your name" 
+        autocomplete="off" 
+        autocorrect="off" 
+        autocapitalize="off" 
+        spellcheck="false"
+        required
+    >
+
+    <datalist id="student-names">
+      {% for n in names %}
+        <option value="{{ n }}"></option>
+      {% endfor %}
+    </datalist>
+
+    <button class="animated-btn" type="submit">Search</button>
+    <button class="animated-btn" onclick="window.location.href='/'">Back</button>
+  </form>
 </section>
+<script>
+/*
+script to only show datalist suggestions after user types first letter
+to avoid overwhelming with too many options at once. Only for mobile devices.
+*/
+
+function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+if (isMobile()) {
+    const input = document.getElementById('student-input');
+
+    // remove datalist initially
+    input.removeAttribute('list');
+
+    input.addEventListener('input', () => {
+        if (input.value.length >= 1) {
+            input.setAttribute('list', 'student-names'); // attach after first letter
+        } else {
+            input.removeAttribute('list'); // hide again if input cleared
+        }
+    });
+}
+</script>
 {% endblock %}
