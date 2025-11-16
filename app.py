@@ -89,7 +89,6 @@ def students():
     if request.method == 'POST':
         name = request.form['name'].strip().lower()
         _, index = get_students()
-
         if name in index:
             return render_template('student_profile.html', student=index[name])
 

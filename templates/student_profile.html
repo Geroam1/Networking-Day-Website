@@ -5,32 +5,58 @@
 {% block content %}
 <!-- General Info Section -->
 <section class="button-container" id="general-info" data-aos="fade-down">
-  <h1>Welcome, {{ student.name }}!</h2>
-  <p>Before you look at your schedule please read the following general information about the networking day.</p>
+  <h1>Welcome, {{ student.name.split(' ')[0] }}!</h2>
 
   <!-- First Years-->
   {% if student.year == 1 %}
+  <p>Before you look at your schedule please read the following general information about the networking day.</p>
   <p><strong>GENERAL INFO FIRST YEAR</strong></p>
 
   <!-- Second Years-->
   {% elif student.year == 2 %}
+  <p>Before you look at your schedule please read the following general information about the networking day.</p>
   <p><strong>GENERAL INFO SECOND YEAR</strong></p>
 
   <!-- Third and Fourth Years-->  
   {% elif student.year == 3 or student.year == 4 %}
+  <p>Before you look at your schedule please read the following general information about the networking day.</p>
   <p><strong>GENERAL INFO THIRD AND FOURTH YEAR</strong></p>
 
   {% else %}
   <p>Your student year is unknown, please contact someone from the committee to help you.</p>
   {% endif %}
-
-  <button onclick="scrollToSchedule()" class="animated-btn">Scroll To Schedule</button>
+  
+  <!-- Scroll Button -->
+  {% if student.year == 1 or student.year == 2%}
+  <button onclick="scrollToElement('group-info')" class="animated-btn">Scroll to group info</button>
+  {% else %}
+  <button onclick="scrollToElement('student-schedule')" class="animated-btn">Scroll to schedule</button>
+  {% endif %}
 </section>
+
+<!-- Group Info Section -->
+{% if student.year == 1 or student.year == 2%}
+<section class="button-container" id="group-info" data-aos="fade-down">
+  <!-- Group Number -->
+  <h1>Your group</h2>
+  <h2><strong>{{ student.group }}</strong> </h2>
+  
+  <!-- Group Mates -->
+  <h1>Your group mates</h1>
+  <ul style="list-style-type: none; padding-left: 0;">
+    {% for mate in student.group_mates.split(', ') %}
+      <li>{{ mate.strip() }}</li>
+    {% endfor %}
+  </ul>
+
+  <button onclick="scrollToElement('student-schedule')" class="animated-btn">Scroll to schedule</button>
+</section>
+{% endif %}
+
 
 <!-- Student Schedule Section -->
 <section class="button-container" id="student-schedule" data-aos="fade-in">
   <h1>{{ student.name }}</h1>
-  <p><strong>Group:</strong> {{ student.group }}</p>
   <p><strong>Schedule:</strong></p>
   <ul>
     <li>Morning: {{ student.morning }}</li>
@@ -45,8 +71,11 @@
 </section>
 
 <script>
-  function scrollToSchedule() {
-    document.getElementById('student-schedule').scrollIntoView({ behavior: 'smooth' });
+function scrollToElement(elementId) {
+  const el = document.getElementById(elementId);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
   }
+}
 </script>
 {% endblock %}
