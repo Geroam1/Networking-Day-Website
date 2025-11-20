@@ -25,6 +25,7 @@ SHEET = CLIENT.open("Networking Day Data Sheet")
 
 STUDENT_SHEET = SHEET.worksheet("students_sheet")
 COMPANIES_SHEET = SHEET.worksheet("companies_sheet")
+SCHEDULES_SHEET = SHEET.worksheet("schedules_sheet")
 
 print("Connected as:", CREDS.service_account_email)
 
@@ -39,7 +40,10 @@ CACHE = {
 
     "companies": None,
     "companies_index": None,
-    "companies_time": 0
+    "companies_time": 0,
+
+    "schedules": None,
+    "schedules_time": 0,
 }
 
 
@@ -61,6 +65,12 @@ def refresh_companies():
     CACHE["companies_time"] = time.time()
 
 
+def refresh_schedules():
+    data = SCHEDULES_SHEET.get_all_records()
+    CACHE["schedules"] = data
+    CACHE["schedules_time"] = time.time()
+
+
 def get_students():
     if time.time() - CACHE["students_time"] > CACHE_TTL or CACHE["students"] is None:
         refresh_students() # api call
@@ -73,6 +83,12 @@ def get_companies():
     return CACHE["companies"], CACHE["companies_index"] # return companies data and name index
 
 
+def get_schedules():
+    if time.time() - CACHE["schedules_time"] > CACHE_TTL or CACHE["schedules"] is None:
+        refresh_schedules()
+    return CACHE["schedules"]
+
+
 # -------------------- ROUTES --------------------
 
 @app.route('/')
@@ -81,6 +97,51 @@ def home():
 
 
 # -------- STUDENTS --------
+# --- helper functions
+def get_speed_dates(speed_dater, prefix="speedDate", student=True):
+    dates = []
+    for name in sorted(speed_dater.keys()):
+        if name.lower().startswith(prefix.lower()) and speed_dater[name]:
+            if student:
+                dates.append(str(speed_dater[name]) + " Speed Date")
+            else:
+                dates.append("Speed Date With Groups: " + str(speed_dater[name]))
+    return dates
+
+
+def personalize_schedule_entries(filtered_schedule, speed_dates):
+    personalized = []
+    speed_index = 0
+    for time, event in filtered_schedule:
+        if "speeddate" in event.lower():
+            if speed_index < len(speed_dates):
+                personalized.append((time, speed_dates[speed_index]))
+                speed_index += 1
+            else:
+                personalized.append((time, event))  # fallback
+        else:
+            personalized.append((time, event))
+    return personalized
+
+
+def filter_schedule_by_year(schedules, year):
+    return [(row["time"], row["event"]) for row in schedules if row["year"] == int(year)]
+
+
+def filter_schedule_by_program(schedules, program):
+    program_map = {
+        "afternoon": "companies_afternoon",
+        "evening": "companies_evening",
+        "afternoon and evening": "companies_afternoon_and_evening"
+    }
+
+    schedule_program = program_map.get(program.lower())
+    if not schedule_program:
+        return []
+
+    return [(row["time"], row["event"]) for row in schedules if row["year"] == schedule_program]
+
+
 @app.route('/students', methods=['GET', 'POST'])
 def students():
     students, _ = get_students()
@@ -90,7 +151,18 @@ def students():
         name = request.form['name'].strip().lower()
         _, index = get_students()
         if name in index:
-            return render_template('student_profile.html', student=index[name])
+            student = index[name]
+            schedules = get_schedules()
+
+            filtered_schedule = filter_schedule_by_year(schedules, student.get("year"))
+            speed_dates = get_speed_dates(student)
+            personalized_schedule = personalize_schedule_entries(filtered_schedule, speed_dates)
+
+            return render_template(
+                'student_profile.html',
+                student=student,
+                schedule=personalized_schedule
+            )
 
         return render_template('students.html', error="Student not found.", names=all_names)
 
@@ -103,7 +175,16 @@ def student_profile(name):
     student = index.get(name.lower())
 
     if student:
-        return render_template('student_profile.html', student=student)
+        schedules = get_schedules()
+        filtered_schedule = filter_schedule_by_year(schedules, student.get("year"))
+        speed_dates = get_speed_dates(student)
+        personalized_schedule = personalize_schedule_entries(filtered_schedule, speed_dates)
+
+        return render_template(
+            'student_profile.html',
+            student=student,
+            schedule=personalized_schedule
+        )
 
     return "Student not found", 404
 
@@ -119,7 +200,18 @@ def companies():
         _, index = get_companies()
 
         if name in index:
-            return render_template('company_profile.html', company=index[name])
+            company = index[name]
+            schedules = get_schedules()
+
+            filtered_schedule = filter_schedule_by_program(schedules, company.get("program"))
+            speed_dates = get_speed_dates(company, student=False)
+            personalized_schedule = personalize_schedule_entries(filtered_schedule, speed_dates)
+
+            return render_template(
+                'company_profile.html',
+                company=company,
+                schedule=personalized_schedule
+            )
 
         return render_template('companies.html', error="Company not found.", names=all_names)
 
@@ -131,10 +223,19 @@ def company_profile(name):
     _, index = get_companies()
     company = index.get(name.lower())
 
-    if company:
-        return render_template('company_profile.html', company=company)
+    if not company:
+        return "Company not found", 404
 
-    return "Company not found", 404
+    schedules = get_schedules()
+    filtered_schedule = filter_schedule_by_program(schedules, company.get("program"))
+    speed_dates = get_speed_dates(company, student=False)
+    personalized_schedule = personalize_schedule_entries(filtered_schedule, speed_dates)
+
+    return render_template(
+        'company_profile.html',
+        company=company,
+        schedule=personalized_schedule
+    )
 
 
 # -------------------- DEV ROUTES --------------------
@@ -145,6 +246,19 @@ def refresh_data():
     refresh_companies()
     return "Data refreshed!"
 
+@app.route("/debug_schedule")
+def debug_schedule():
+    schedules = get_schedules()
+    student_year = 2
+
+    # get the schedule for the student's year only
+    filtered_schedule = [
+        (row["time"], row["event"]) 
+        for row in schedules 
+        if int(row["year"]) == student_year
+    ]
+
+    return filtered_schedule
 
 # -------------------- RUN --------------------
 if __name__ == "__main__":

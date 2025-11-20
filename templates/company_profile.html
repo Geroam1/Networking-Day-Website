@@ -8,30 +8,61 @@
   <h1>Welcome, {{ company.name }}!</h2>
   <p>Before you look at your schedule please read the following general information about the networking day.</p>
 
-  <!-- First Years-->
-  <p><strong>GENERAL INFO COMPANIES</strong></p>
+  <!-- General Info Section -->
+  <p>
+  As a company you are a core part to our networking day. You have been scheduled for various speed dates with the students
+  attending the event. During the afternoon there will be students from both the first and second years coming to you in groups, you will be speed dating with
+  1 or 2 groups at a time. During the evening there will only be third and fourth years, and the speed dates will be more intimate. The speed date
+  times are in your schedule below, please ensure you are at your table before the speed date starts, since the students are here to see you!
+  </p>
+  <p>
+  There is also a company market planned in your schedule, this is a time dedicated to letting the students walk around and visit your table,
+  this is to allow the students to speak with companies they havent had the chance to meet or to talk more with companies they are interested in.
+  During this time please stay at your table to greet any students interested in speaking with you.
+  </p>
+  <p>
+  If you are a company that is attending in both the afternoon and evening programs, we have dinner for you at 17:30! this will be an italian
+  buffet that will take place in the break room. If you have any dietary requirements please contact someone from the committee.
+  </p>
+  <p>
+  We wish you have a meaningful and fun networking day with our students! please read your schedule below.
+  </p>
 
-  <button onclick="scrollToSchedule()" class="animated-btn">Scroll To Schedule</button>
+  <button onclick="scrollToElement('company-schedule')" class="animated-btn">Scroll to schedule</button>
 </section>
 
 <!-- Company Schedule Section -->
 <section class="button-container" id="company-schedule" data-aos="fade-in">
-  <h1>{{ company.name }}</h1>
-  <p><strong>Schedule:</strong></p>
-  <ul>
-    <li>First: Group {{ company.first_group }}</li>
-    <li>Second: Group {{ company.second_group }}</li>
-    <li>Third: Group {{ company.third_group }}</li>
-  </ul>
+    <h1>Your Schedule</h1>
+    <table class="t-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Event</th>
+            </tr>
+        </thead>
 
-  <div class="button-container">
-    <button class="animated-btn" onclick="window.location.href='/companies'">Back To Company Search</button>
-  </div>
+        <tbody>
+          {% for row in schedule %}
+          <tr>
+              <td>{{ row[0] }}</td> <!-- Time -->
+              <td>{{ row[1] }}</td> <!-- Event -->
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+
+  <!-- <div class="button-container">
+    <button class="animated-btn" onclick="window.location.href='/companies'">Back to company search</button>
+  </div> -->
 </section>
 
 <script>
-  function scrollToSchedule() {
-    document.getElementById('company-schedule').scrollIntoView({ behavior: 'smooth' });
+function scrollToElement(elementId) {
+  const el = document.getElementById(elementId);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth' });
   }
+}
 </script>
 {% endblock %}

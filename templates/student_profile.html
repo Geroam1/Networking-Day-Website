@@ -56,19 +56,30 @@
 
 <!-- Student Schedule Section -->
 <section class="button-container" id="student-schedule" data-aos="fade-in">
-  <h1>{{ student.name }}</h1>
-  <p><strong>Schedule:</strong></p>
-  <ul>
-    <li>Morning: {{ student.morning }}</li>
-    <li>Afternoon: {{ student.afternoon }}</li>
-    <li>Evening: {{ student.evening }}</li>
-    <li>Extra: {{ student.extra }}</li>
-  </ul>
-  
-  <div class="button-container">
-    <button class="animated-btn" onclick="window.location.href='/students'">Back to Name Search</button>  
-  </div>
+    <h1>Your Schedule</h1>
+    <table class="t-table">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Event</th>
+            </tr>
+        </thead>
+
+        <tbody>
+          {% for row in schedule %}
+          <tr>
+              <td>{{ row[0] }}</td> <!-- Time -->
+              <td>{{ row[1] }}</td> <!-- Event -->
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- <div class="button-container" style="margin-top: 30px">
+      <button class="animated-btn" onclick="window.location.href='/students'">Back to name search</button>  
+    </div> -->
 </section>
+
 
 <script>
 function scrollToElement(elementId) {

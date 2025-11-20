@@ -15,7 +15,7 @@ body {
 
 h1 {
     font-size: 2.5rem;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 
@@ -35,7 +35,7 @@ section {
 
 html {
     scroll-behavior: auto;
-    scroll-snap-type: y mandatory;
+    /* scroll-snap-type: y mandatory; */
 }
 
 
@@ -135,6 +135,34 @@ img {
     max-width: 400px;       /* consistent width */
     box-sizing: border-box; /* include padding in width */
 }
+
+/* T shape table for schedules style */
+.t-table {
+    border-collapse: collapse;
+    width: 90vw;
+    max-width: 800px;
+    margin-top: 30px;
+    font-size: 1.3rem;
+    color: #5f0a87;
+}
+
+.t-table th {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 12px;
+    border-bottom: 3px solid #a4508b; /* top of the T */
+}
+
+.t-table td {
+    padding: 12px;
+    border-bottom: 1px solid #d8b4de; /* column division */
+}
+
+/* subtle hover highlight */
+.t-table tr:hover td {
+    background-color: #f8f0fb;
+}
+
 
 
 @media (max-width: 600px) {
