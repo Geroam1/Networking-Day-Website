@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 stress_test.py
 stress_results.csv
+get_speed_dates_afternoon.py
+get_speed_dates_evening.py

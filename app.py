@@ -90,22 +90,20 @@ def get_schedules():
 
 
 # -------------------- ROUTES --------------------
-
 @app.route('/')
 def home():
     return render_template('home.html')
 
 
-# -------- STUDENTS --------
 # --- helper functions
 def get_speed_dates(speed_dater, prefix="speedDate", student=True):
     dates = []
     for name in sorted(speed_dater.keys()):
         if name.lower().startswith(prefix.lower()) and speed_dater[name]:
-            if student:
-                dates.append(str(speed_dater[name]) + " Speed Date")
+            if name.lower().endswith("pitches") and speed_dater[name]:
+                dates.append("Pitches with: " + str(speed_dater[name]))
             else:
-                dates.append("Speed Date With Groups: " + str(speed_dater[name]))
+                dates.append("Speed date with: " + str(speed_dater[name]))
     return dates
 
 
@@ -142,6 +140,7 @@ def filter_schedule_by_program(schedules, program):
     return [(row["time"], row["event"]) for row in schedules if row["year"] == schedule_program]
 
 
+# -------- STUDENTS --------
 @app.route('/students', methods=['GET', 'POST'])
 def students():
     students, _ = get_students()
