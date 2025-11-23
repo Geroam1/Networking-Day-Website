@@ -12,23 +12,39 @@
   <!-- Afternoon and Evening Companies -->
   {% if company.program == "afternoon and evening" %}
   <p>
-  afternoon and evening
+  This afternoon, you will participate in a series of speed dates as well as the company market. 
+  During the speed dates, first and second year student groups will visit your table, where you’ll start by presenting your company. 
+  At the company market, students will walk around to speak with companies they are interested in, and may approach your table for a conversation. The last
+  speed date will be different, second year students will be pitching themselves to you.
   <br><br>
+  Before the evening program begins, there will be an hour of dinner time to give you a break, 
+  there is an Italian buffet for you! In the evening, speed dates will be 1-on-1 or 2-on-1 with third and fourth year students. 
+  We expect one representative to speak with each student or student pair during these speed dates.
+  <br><br>
+  Below, you’ll find your schedule for the day. Please read it carefully and ensure you are at your table on time for each event. 
+  We hope you have a productive networking day!
   </p>
 
 
   <!-- Afternoon Only Companies -->
   {% elif company.program == "afternoon" %}
   <p>
-  afternoon
+  This afternoon, you will participate in a series of speed dates as well as the company market. During the speed dates, 
+  first and second year student groups will visit your table, where you’ll start by presenting your company. At the company market, 
+  students will walk around to speak with companies they are interested in, and may approach your table for a conversation. 
+  The last speed date will be different, second year students will be pitching themselves to you.
   <br><br>
+  Below, you’ll find your schedule for the day. Please read it carefully and ensure you are at your table on time for each event. 
+  We hope you have a productive networking day!
   </p>
 
   {% else %}
   <!-- Evening Only Companies -->
   <p>
-  evening
+  This evening, you will be sat at your own designated table representing your company, and participating in four rounds of 1-on-1 or 2-on-1 speed dates with 
+  third and fourth year students. We expect one representative to speak with each student or student pair during these speed dates.
   <br><br>
+  Below, you’ll find your schedule for the night. Please read it carefully. We hope you have a productive networking day!
   </p>
   {% endif %}
 
@@ -38,6 +54,12 @@
 <!-- Company Schedule Section -->
 <section class="button-container" id="company-schedule" data-aos="fade-in">
     <h1>Your schedule</h1>
+
+    <!-- Details link -->
+    <div class="details-link" data-aos="fade-left">
+      <p>Want more details? <span onclick="openDetails()" class="details-button">Click here!</span></p>
+    </div>
+
     <table class="t-table">
         <thead>
             <tr>
@@ -61,12 +83,46 @@
   </div> -->
 </section>
 
+
+
+<!-- More details for companies -->
+<div id="details-panel" class="details-panel">
+
+  <div class="details-header">
+    <h2>Event Details</h2>
+    <button class="close-btn" onclick="closeDetails()">✕</button>
+  </div>
+
+  <div class="details-content">
+    <h3>What is a speed date?</h3>
+    <p>Speed date details</p>
+
+    <h3>What is the company market?</h3>
+    <p>Company market details</p>
+
+    <h3>Pitching Round (Second Years)</h3>
+    <p>Pitches details</p>
+    
+
+    <!-- For more sections just add here -->
+  </div>
+
+</div>
+
 <script>
 function scrollToElement(elementId) {
   const el = document.getElementById(elementId);
   if (el) {
     el.scrollIntoView({ behavior: 'smooth' });
   }
+}
+
+function openDetails() {
+  document.getElementById("details-panel").style.right = "0";
+}
+
+function closeDetails() {
+  document.getElementById("details-panel").style.right = "-120%";
 }
 </script>
 {% endblock %}

@@ -169,6 +169,80 @@ img {
 }
 
 
+/* More Details For Companies Block Styles*/
+.details-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.details-button {
+  color: purple;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Slide-in panel */
+.details-panel {
+  position: fixed;
+  top: 0;
+  right: -120%; /* Hidden initially */
+  width: 90%;
+  max-width: 450px;
+  height: 100vh;
+  background: white;
+  /* border-radius: 20px 0 0 20px; */
+  /* border-left: 3px solid rgba(125, 60, 255, 0.6);
+  border-top: 3px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.5); */
+
+  box-shadow: 0 0 20px rgba(125, 60, 255, 0.4);
+  
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s ease-in-out; /* Slide animation */
+  z-index: 9999;
+  padding: 20px;
+}
+
+/* Header */
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: purple;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close-btn:hover {
+  background: rgb(167, 3, 167);
+}
+
+/* Content area scrollable */
+.details-content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.details-content h3 {
+  margin-top: 20px;
+  color: purple;
+}
+
+.details-content p {
+  line-height: 1.5;
+}
+
+
 
 @media (max-width: 600px) {
     h1 {
