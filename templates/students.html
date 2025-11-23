@@ -11,6 +11,10 @@
   {% endif %}
 
   <form method="POST" action="/students" class="button-container" data-aos="fade-up">
+    <!-- hint if the student is stupid -->
+    {% if error %}
+      <small id="input-hint">Select your name from the browser suggestions for the correct spelling.</small>
+    {% endif %}
 
     <!-- name value sent to flask -->
     <input 
@@ -34,7 +38,7 @@
     </datalist>
 
     <button class="animated-btn" type="submit">Search</button>
-    <button class="animated-btn" onclick="window.location.href='/'">Back</button>
+    <button class="animated-btn" type="button" onclick="window.location.href='/'">Back</button>
   </form>
 </section>
 <script>

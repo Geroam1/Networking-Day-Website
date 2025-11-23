@@ -7,21 +7,44 @@
 <section class="button-container" id="general-info" data-aos="fade-down">
   <h1>Welcome, {{ student.name.split(' ')[0] }}!</h2>
 
+
   <!-- First Years-->
   {% if student.year == 1 %}
-  <p>Before you look at your schedule please read the following general information about the networking day.</p>
-  <p><strong>GENERAL INFO FIRST YEAR</strong></p>
+  <p>
+  Today you’ll take part in several activities designed to help you start building your professional network of company connections. 
+  Throughout the day, you'll participate in company speed dates with your assigned group, attend presentations about the basics and importance of networking, 
+  and use our company market to speak with companies at your own pace.
+  <br><br>
+  Below you will find your group mates and your schedule for the day. Please make sure to meet up with your group and arrive on time to each activity.
+  </p>
+
 
   <!-- Second Years-->
   {% elif student.year == 2 %}
-  <p>Before you look at your schedule please read the following general information about the networking day.</p>
-  <p><strong>GENERAL INFO SECOND YEAR</strong></p>
+  <p>
+  Today you'll take part in several activities to help you find an internship, and continue growing your professional network. 
+  Throughout the day, you'll participate in company speed dates with your assigned group, attend a presentation on the importance of networking, 
+  use our company market to speak with companies at your own pace, 
+  and end the day by pitching yourself to a company as part of your professional skills development.
+  <br><br>
+  Below you will find your group mates and your schedule for the day. Please make sure to meet up with your group and arrive on time to each activity.
+  </p>
 
   <!-- Third and Fourth Years-->  
   {% elif student.year == 3 or student.year == 4 %}
-  <p>Before you look at your schedule please read the following general information about the networking day.</p>
-  <p><strong>GENERAL INFO THIRD AND FOURTH YEAR</strong></p>
+  <p>
+  Tonight, you will take part in four rounds of 15-minute speed dates with individual company representatives from the companies you’ve been assigned to. 
+  Third-year students will participate in 2-on-1 speed dates with their internship duo partner (if both are present), 
+  while fourth-year students will have 1-on-1 speed dates. Please take your seat, either individually or with your duo, 
+  as quickly as possible to make the most of your time with each representative.
+  <br><br>
+  Below you will find your schedule for the evening. Please ensure you arrive on time for each speed date and avoid staying longer than your allotted slot 
+  so that all students have the opportunity to meet with their assigned companies. Third-year students should meet up with their duo partner (if both are present) 
+  before the rounds begin.
+  </p>
 
+
+  <!-- handle no student year -->
   {% else %}
   <p>Your student year is unknown, please contact someone from the committee to help you.</p>
   {% endif %}
@@ -36,7 +59,7 @@
 
 <!-- Group Info Section -->
 {% if student.year == 1 or student.year == 2%}
-<section class="button-container" id="group-info" data-aos="fade-down">
+<section class="button-container" id="group-info" data-aos="fade-in">
   <!-- Group Number -->
   <h1>Your group</h2>
   <h2><strong>{{ student.group }}</strong> </h2>
