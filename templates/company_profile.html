@@ -148,6 +148,7 @@
     {% endif %}
 
     <!-- Evening Companies-->
+    {% if company.program == "afternoon and evening" or company.program == "evening"%}
     <h3>Introduction to the evening program</h3>
     <p style="margin-bottom: 50px;">
     By this time, 3rd and 4th year students will have arrived at the event. Everyone will gather in the main hall to start the event with 
@@ -171,6 +172,7 @@
     We will give a closing speach to mark the end of the networking day. 
     We have gifts for you, so dont leave without them!
     </p>
+    {% endif %}
 
   </div>
 
