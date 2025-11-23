@@ -94,17 +94,84 @@
   </div>
 
   <div class="details-content">
-    <h3>What is a speed date?</h3>
-    <p>Speed date details</p>
+    <!-- Afternoon Companies -->
+    {% if company.program == "afternoon" or company.program == "afternoon and evening"%}
+    <h3>Arrival and Preparations</h3>
+    <p style="margin-bottom: 50px;">
+      There will be tea and coffee to welcome you, in the lobby you can pick up your parking ticket and name badge. 
+      You can scan the QR code in the lobby to access the schedules. 
+      During this time you can also prepare your standing table and your banner. 
+      10 minutes before the official start, you will also be given a few instructions by the 
+      committee and you can answer any of your remaining questions.
+    </p>
 
-    <h3>What is the company market?</h3>
-    <p>Company market details</p>
+    <h3>Introduction to the afternoon program</h3>
+    <p style="margin-bottom: 50px;">
+    By this time, 1st and 2nd year students will have arrived at the event as well. Everyone will gather in the main hall to start the event 
+    with an opening speech and presentation. Then, the students will be have a few minutes to get into groups and prepare for the speed dates. 
+    </p>
 
-    <h3>Pitching Round (Second Years)</h3>
-    <p>Pitches details</p>
-    
+    <h3>Speed dates (1st and 2nd round)</h3>
+    <p style="margin-bottom: 50px;">
+    You will be meeting with 1st and 2nd year student groups for a speed date. 
+    You can find the which student groups are assigned to which time slot on the schedule.
+    </p>
 
-    <!-- For more sections just add here -->
+    <h3>Speed dates (3rd and 4th round)</h3>
+    <p style="margin-bottom: 50px;">
+    You will be meeting with 2nd year students only for a speed date.
+    </p>
+
+    <h3>Company market</h3>
+    <p style="margin-bottom: 50px;">
+    This time is reserved for students to walk around freely and approach the companies that they are interested in and network.
+    </p>
+
+    <h3>Speed dates and pitches (5th round)</h3>
+    <p style="margin-bottom: 50px;">
+    You will be meeting 2nd year students for a speeddate. During this last slot, the students are expected to perform a short 
+    'elevator pitch' to you, like they would in an interview. You are expected to fill in the pitch form with your feedback, 
+    sign it and give it back to the student. 
+    </p>
+
+    <h3>Closing of the afternoon program</h3>
+    <p style="margin-bottom: 50px;">
+    Gather in the main hall and close the afternoon program with a speech from the committee.
+    </p>
+    {% endif %}
+
+    {% if company.program == "afternoon and evening"%}
+    <h3>Dinner</h3>
+    <p style="margin-bottom: 50px;">
+    Bring your appetite! We will be serving an italian buffet. If you have any dietary restrictions, consult with the staff or the committee. 
+    </p>
+    {% endif %}
+
+    <!-- Evening Companies-->
+    <h3>Introduction to the evening program</h3>
+    <p style="margin-bottom: 50px;">
+    By this time, 3rd and 4th year students will have arrived at the event. Everyone will gather in the main hall to start the event with 
+    an opening speech and presentation.
+    </p>
+
+    <h3>Four rounds of evening speed dates</h3>
+    <p style="margin-bottom: 50px;">
+    You will be meeting with students individually in 1-on-1 or 2-on-1 speed dates, based on a schedule made before the event. 
+    The third year students will be doing their internship in a duo, which is why they will be doing their speed date together 
+    in the 2-on-1's. The schedule has been made in mind with yours and the stduent's preferences in specialization and language.
+    </p>
+
+    <h3>Borrel</h3>
+    <p style="margin-bottom: 50px;">
+    You can use this time to chat, socialize, have a drink, and connect with students that have not had the chance to speak to you yet.
+    </p>
+
+    <h3>Closing speech.</h3>
+    <p style="margin-bottom: 50px;">
+    We will give a closing speach to mark the end of the networking day. 
+    We have gifts for you, so dont leave without them!
+    </p>
+
   </div>
 
 </div>
