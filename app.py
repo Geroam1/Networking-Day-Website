@@ -101,7 +101,7 @@ def get_speed_dates(speed_dater, prefix="speedDate", student=True):
     for name in sorted(speed_dater.keys()):
         if name.lower().startswith(prefix.lower()) and speed_dater[name]:
             if name.lower().endswith("pitches") and speed_dater[name]:
-                dates.append("Pitches with: " + str(speed_dater[name]))
+                dates.append("Speed date + pitches with: " + str(speed_dater[name]))
             else:
                 dates.append("Speed date with: " + str(speed_dater[name]))
     return dates
